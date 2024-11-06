@@ -1,0 +1,44 @@
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.left-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.trade-button {
+    background-color: #f0b90b;
+    color: #1e1e1e;
+    border: 1px solid transparent; /* Borde invisible inicialmente */
+    padding: 10px 20px; /* Asegúrate de mantener el mismo padding */
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    border-radius: 5px;
+}
+
+.trade-button:hover {
+    background-color: #1e1e1e;
+    color: #f0b90b;
+    border-color: #f0b90b; /* Cambia el borde a amarillo en hover */
+}
+
+.trade-button:focus {
+    outline: none;
+}
+
+.reload-button {
+    background-color: #333333;
+    color: #f0b90b;
+}
+
+.reload-button:hover {
+    background-color: #292929;
+}

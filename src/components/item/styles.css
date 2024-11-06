@@ -1,0 +1,56 @@
+/* Aplica un fondo oscuro y color de texto claro a la tabla */
+table {
+    width: 100%;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-collapse: collapse;
+    font-family: 'Roboto', sans-serif;
+    margin: 20px 0;
+}
+
+/* Estilos de las filas */
+tr {
+    transition: background-color 0.3s;
+}
+
+/* Resalta las filas al pasar el cursor */
+tr:hover {
+    background-color: #333333;
+}
+
+/* Estilos para cada celda */
+td {
+    padding: 10px 15px;
+    text-align: center;
+    border-bottom: 1px solid #444444;
+}
+
+
+
+/* Precisión del Precio */
+td:nth-child(4), td:nth-child(5) {
+    color: #f0b90b; /* Amarillo para precios */
+    font-weight: bold;
+}
+
+/* Tamaño del texto en general */
+td, th {
+    font-size: 14px;
+}
+
+/* Encabezado de tabla */
+th {
+    padding: 12px 15px;
+    background-color: #333333;
+    color: #f0b90b;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+.positivePnl {
+    color: #00c853;
+}
+
+.negativePnl {
+    color: #d50000;
+}
