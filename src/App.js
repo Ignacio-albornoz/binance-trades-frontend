@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import Trades from './pages/Trades';  // Importamos el componente "Trades"
 import './App.css';
 

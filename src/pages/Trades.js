@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './styles.css';
 import Item from '../components/item/item';  // Importamos el componente "Item"
+import TradeList from '../components/tradeList/index';  // Importamos el componente "TradeList"
 import TradeButtons from '../components/historyButton/index';  // Importamos el componente "TradeButtons"
+import ListOfTraderCard from '../components/listOfTraderCard/index';  // Importamos el componente "ListOfTraderCard"
+
+import './styles.css';
+
+const traderData = [
+  { name: 'Juan Pérez', futuresUSD: 5000, spotUSD: 3000, profit: 1200, dailyProfit: 200 },
+  { name: 'Ana López', futuresUSD: 8000, spotUSD: 6000, profit: 1500, dailyProfit: 300 },
+  { name: 'Carlos Gómez', futuresUSD: 2000, spotUSD: 1500, profit: 500, dailyProfit: 100 },
+]
 
 const Trades = () => {
     const [trades, setTrades] = useState([]);
@@ -54,32 +63,11 @@ const Trades = () => {
             <h1 className='trades-title'>Futures Trades</h1>
             {notification && <div className="popup-notification">{notification}</div>}
             <TradeButtons onGenerateExcel={handleGenerateExcel} onReload={fetchTrades}/>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Symbol</th>
-                        <th>Unrealized Profit</th>
-                        <th>Entry Price</th>
-                        <th>Mark Price</th>
-                        <th>Leverage</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {trades.map((trades) => (
-                        trades.map((trade, index) => (
-                            <Item
-                                key={index}
-                                name={trade.name}
-                                symbol={trade.symbol}
-                                unrealizedProfit={trade.unrealizedProfit}
-                                entryPrice={trade.entryPrice}
-                                markPrice={trade.markPrice}
-                                leverage={trade.leverage}
-                            />
-                    ))))}
-                </tbody>
-            </table>
+            <TradeList trades={trades} />
+            <div>
+                <h1 style={{ textAlign: 'center', color: 'white', padding: '20px' }}>Lista de Traders</h1>
+                <ListOfTraderCard traders={traderData} />
+            </div>
         </div>
     );
 };

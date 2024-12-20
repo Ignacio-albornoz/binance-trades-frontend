@@ -1,0 +1,9 @@
+.list-of-trader-card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    gap: 20px; /* Espaciado entre las cards */
+    justify-items: center; /* Centra cada card dentro de su celda */
+    align-items: start; /* Alinea las cards al inicio de cada celda */
+    max-width: inherit;
+    background-color: #1e1e1e;
+}
