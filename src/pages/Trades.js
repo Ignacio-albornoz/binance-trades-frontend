@@ -22,7 +22,7 @@ const Trades = () => {
     const fetchTrades = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:3000/api/orders'); 
+            const response = await axios.get('http://localhost:3000/mock/orders'); 
             setTrades(response.data);
             setLoading(false);
         } catch (error) {
@@ -33,7 +33,7 @@ const Trades = () => {
 
     const handleGenerateExcel = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/update-record');
+            const response = await axios.get('http://localhost:3000/mock/update-record');
             if (response.status === 200) {
                 setNotification('Excel actualizado exitosamente');
             } else {
