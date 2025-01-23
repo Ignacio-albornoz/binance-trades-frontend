@@ -2,13 +2,16 @@ import React from 'react';
 import Item from '../item/item'; // Asegúrate de que Item esté en la ruta correcta
 import './styles.css';
 
-const TradeList = ({ trades }) => {
+const TradeList = ({ trades, isLoading }) => {
     const hasTrades = trades.length > 0 && trades.some((group) => group.length > 0);
 
     return (
-        <div>
+        <div className="table-wrapper">
+            {/* Indicador de carga en la parte superior de la tabla */}
+            {isLoading && <div className="loading-bar"></div>}
+            
             {hasTrades ? (
-                <table className='table-container'>
+                <table className="table-container">
                     <thead>
                         <tr>
                             <th>Name</th>

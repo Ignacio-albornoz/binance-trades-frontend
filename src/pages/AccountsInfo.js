@@ -112,7 +112,7 @@ const AccountsInfo = () => {
       {isLoggedIn && (
         <>
           <TradeButtons onGenerateExcel={useExcelGenerator} onReload={handleFetchTrades} />
-          {loadingTrades ? <p>Cargando trades...</p> : <TradeList trades={trades} />}
+          <TradeList trades={trades} isLoading={loadingTrades} />
         </>
       )}
     </div>
