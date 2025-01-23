@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaFileExcel, FaSyncAlt, FaDownload } from 'react-icons/fa'; // Ejemplo de íconos
 import './styles.css';
 
 const URL_EXCEL = 'https://docs.google.com/spreadsheets/d/1rIbAzxMusyS5tTIuU6qTQ0fdyt6vz_JDcZX1foJPN30/edit?gid=648864529#gid=648864529';
@@ -7,7 +8,7 @@ const TradeButtons = ({ onReload }) => {
     const [statusMessage, setStatusMessage] = useState('');
     
 
-    const handleGenerateExcel = async () => {
+    const updateWallet = async () => {
         try {
             const response = await fetch('http://92.113.32.86:3000/api/update-record', {
                 method: 'GET',
@@ -29,21 +30,38 @@ const TradeButtons = ({ onReload }) => {
         }
     };
 
+
     return (
         <div className="button-container">
             <div className="left-buttons">
-                <button className="trade-button" onClick={handleGenerateExcel}>
-                    Actualizar Cuentas
+                {/* Botón para actualizar cuentas */}
+                <button className="trade-button" onClick={updateWallet}>
+                    <span className="button-icon">
+                        <FaSyncAlt />
+                    </span>
+                    <span className="button-text">Actualizar Cuentas</span>
                 </button>
+
+                {/* Botón para abrir Excel */}
                 <a href={URL_EXCEL} target="_blank" rel="noopener noreferrer">
-                    <button className="trade-button">Abrir Excel</button>
+                    <button className="trade-button">
+                        <span className="button-icon">
+                            <FaFileExcel />
+                        </span>
+                        <span className="button-text">Abrir Excel</span>
+                    </button>
                 </a>
             </div>
-            <button className="trade-button reload-button" onClick={onReload}>
-                Recargar
-            </button>
-            {statusMessage && <div className="popup-notification">{statusMessage}</div>}
 
+            {/* Botón para recargar */}
+            <button className="trade-button reload-button" onClick={onReload}>
+                <span className="button-icon">
+                    <FaDownload />
+                </span>
+                <span className="button-text">Recargar</span>
+            </button>
+
+            {statusMessage && <div className="popup-notification">{statusMessage}</div>}
         </div>
     );
 };

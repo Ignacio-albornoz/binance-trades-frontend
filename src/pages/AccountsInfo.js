@@ -104,11 +104,6 @@ const AccountsInfo = () => {
       {!isLoggedIn && (
         <div className="login-container">
           <button className="google-login-button" onClick={handleLogin}>
-            <img
-              src="https://developers.google.com/identity/images/g-logo.png"
-              alt="Google logo"
-              className="google-logo"
-            />
             Login with Google
           </button>
         </div>
