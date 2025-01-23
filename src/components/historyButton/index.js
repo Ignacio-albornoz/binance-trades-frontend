@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import { FaSyncAlt, FaWallet  } from 'react-icons/fa'; // Ejemplo de íconos
 import { SiGooglesheets } from "react-icons/si";
+import { useAuth } from "../../context/AuthContext"; // Asegúrate de importar el contexto correcto
+import axios from 'axios';
 
 import './styles.css';
 
 const URL_EXCEL = 'https://docs.google.com/spreadsheets/d/1rIbAzxMusyS5tTIuU6qTQ0fdyt6vz_JDcZX1foJPN30/edit?gid=648864529#gid=648864529';
 
+
 const TradeButtons = ({ onReload }) => {
     const [statusMessage, setStatusMessage] = useState('');
-    
+    const { token } = useAuth();
+
+    console.log('Token:', token);
 
     const updateWallet = async () => {
         try {
-            const response = await fetch('http://92.113.32.86:3000/api/update-record', {
-                method: 'GET',
+            const response = await axios.get("http://92.113.32.86:3000/api/update-record", {
                 headers: {
-                    'Content-Type': 'application/json',
+                  Authorization: `Bearer ${token}`, // Usa el token almacenado
                 },
             });
 
