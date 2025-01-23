@@ -9,7 +9,7 @@ const TradeButtons = ({ onReload }) => {
 
     const handleGenerateExcel = async () => {
         try {
-            const response = await fetch('http://92.113.32.86:3001/api/update-record', {
+            const response = await fetch('http://92.113.32.86:3000/api/update-record', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
