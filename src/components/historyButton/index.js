@@ -8,7 +8,7 @@ const TradeButtons = ({ onReload }) => {
 
     const handleGenerateExcel = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/update-record', {
+            const response = await fetch('http://92.113.32.86:3001/api/update-record', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ const TradeButtons = ({ onReload }) => {
         <div className="button-container">
             <div className="left-buttons">
                 <button className="trade-button" onClick={handleGenerateExcel}>
-                    Generar Excel
+                    Actualizar Cuentas
                 </button>
                 <a href={URL_EXCEL} target="_blank" rel="noopener noreferrer">
                     <button className="trade-button">Abrir Excel</button>
