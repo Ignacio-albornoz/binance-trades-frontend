@@ -18,7 +18,7 @@
     background: linear-gradient(90deg, #f0b90b 0%, #ffe08c 50%, #f0b90b 100%);
     background-size: 200%;
     animation: loading 1.5s infinite;
-    margin-bottom: 8px;
+    margin-bottom: 0px;
     border-radius: 4px;
 }
 
@@ -37,28 +37,8 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 16px;
-    background-color: #1e1e1e;
-    color: #f0b90b;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
     overflow: hidden;
-}
-
-.table-container th,
-.table-container td {
-    border: 1px solid #333;
-    padding: 12px;
-    text-align: left;
-    font-weight: bold;
-    color: #f0b90b;
-}
-
-.table-container th {
-    background-color: #333;
-}
-
-.table-container td {
-    background-color: #262626;
 }
 
 /* Ajustes responsivos */
