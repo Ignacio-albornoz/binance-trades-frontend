@@ -36,7 +36,7 @@ const useTrades = () => {
 
     setLoadingTrades(true);
     try {
-      const response = await axios.get("http://localhost:3000/api/orders", {
+      const response = await axios.get("http://92.113.32.86:3001/api/orders", {
         headers: {
           Authorization: `Bearer ${token}`, // Usa el token almacenado
         },
