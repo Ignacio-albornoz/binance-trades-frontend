@@ -21,7 +21,7 @@ const useTrades = () => {
       const userToken = await loginWithGoogle(); // Login con Google
       setToken(userToken); // Guarda el token en el estado
       setIsLoggedIn(true); // Marca al usuario como autenticado
-      console.log("User logged in, token:", userToken);
+      console.log("User logged in, token");
     } catch (error) {
       console.error("Error during login:", error.message);
     }
@@ -59,7 +59,7 @@ const useTrades = () => {
       if (user) {
         const newToken = await user.getIdToken(true); // Refresca el token
         setToken(newToken);
-        console.log("Token refreshed:", newToken);
+        console.log("Token refreshed:");
       }
     } catch (error) {
       console.error("Error refreshing token:", error.message);

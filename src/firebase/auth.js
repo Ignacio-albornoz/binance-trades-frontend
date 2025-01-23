@@ -6,7 +6,7 @@ export const loginWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
     const token = await result.user.getIdToken(); // Obtén el token JWT
-    console.log("User Token:", token);
+    console.log("User Loged");
     return token;
   } catch (error) {
     console.error("Error during login:", error.message);

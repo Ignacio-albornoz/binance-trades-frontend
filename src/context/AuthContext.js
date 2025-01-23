@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
       const userToken = await loginFunction();
       setToken(userToken);
       setIsLoggedIn(true);
-      console.log("User logged in, token:", userToken);
+      console.log("User logged in");
     } catch (error) {
       console.error("Error during login:", error.message);
     }
