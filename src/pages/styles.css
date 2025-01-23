@@ -71,7 +71,7 @@
     font-weight: bold;
     text-align: center;
     z-index: 1000;
-    animation: fadeOut 3s ease forwards;
+    animation: fadeOut 6s ease forwards;
 }
 
 /* Animación para desaparecer gradualmente */

@@ -44,3 +44,30 @@
     color: #1e1e1e;
 
 }
+
+/* Notificaciones emergentes */
+.popup-notification {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: #1e1e1e;
+    color: #f0b90b;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    text-align: center;
+    z-index: 1000;
+    animation: fadeOut 6s ease forwards;
+}
+
+/* Animación para desaparecer gradualmente */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

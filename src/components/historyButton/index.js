@@ -5,6 +5,7 @@ const URL_EXCEL = 'https://docs.google.com/spreadsheets/d/1rIbAzxMusyS5tTIuU6qTQ
 
 const TradeButtons = ({ onReload }) => {
     const [statusMessage, setStatusMessage] = useState('');
+    
 
     const handleGenerateExcel = async () => {
         try {
@@ -41,7 +42,8 @@ const TradeButtons = ({ onReload }) => {
             <button className="trade-button reload-button" onClick={onReload}>
                 Recargar
             </button>
-            {statusMessage && <p className="status-message">{statusMessage}</p>}
+            {statusMessage && <div className="popup-notification">{statusMessage}</div>}
+
         </div>
     );
 };
