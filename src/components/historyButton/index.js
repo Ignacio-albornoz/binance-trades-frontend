@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import './styles.css';
 
-const URL_EXCEL = 'https://docs.google.com/spreadsheets/d/1rIbAzxMusyS5tTIuU6qTQ0fdyt6vz_JDcZX1foJPN30/edit?gid=648864529#gid=648864529';
+const URL_EXCEL = 'https://docs.google.com/spreadsheets/d/1rIbAzxMusyS5tTIuU6qTQ0fdyt6vz_JDcZX1foJPN30/edit?gid=1792783061#gid=1792783061';
 
 
 const TradeButtons = ({ onReload }) => {
