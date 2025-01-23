@@ -1,20 +1,73 @@
+/* General Container */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 10px;
+    background-color: #1e1e1e;
+    color: #f0b90b; /* Texto amarillo Binance */
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    max-width: 1024px;
+    margin: 12px auto;
+}
+
+/* Título de Trades */
 .trades-title {
     font-size: 2.5rem;
     font-weight: bold;
-    margin: 2rem 0; 
-    color: white;
+    margin: 2rem 0;
+    color: #f0b90b; /* Amarillo Binance */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    text-align: center;
 }
 
+/* Login Container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Botón de Google Login */
+.google-login-button {
+    display: flex;
+    align-items: center;
+    background-color: #f0b90b;
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.google-login-button:hover {
+    background-color: #d3a108;
+    transform: scale(1.05);
+}
+
+.google-logo {
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Notificaciones emergentes */
 .popup-notification {
     position: fixed;
-    top: 20%;
+    top: 10%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
     background-color: #1e1e1e;
     color: #f0b90b;
     padding: 15px 30px;
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     font-weight: bold;
     text-align: center;
     z-index: 1000;
@@ -28,5 +81,33 @@
     }
     100% {
         opacity: 0;
+    }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .trades-title {
+        font-size: 2rem;
+    }
+
+    .google-login-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .popup-notification {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .trades-title {
+        font-size: 1.8rem;
+    }
+
+    .google-login-button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
     }
 }

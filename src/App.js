@@ -1,13 +1,14 @@
-import Trades from './pages/Trades';  // Importamos el componente "Trades"
+import React from "react";
+import ReactDOM from "react-dom";
+import { AuthProvider } from "./context/AuthContext"; // Ajusta la ruta según la ubicación
 import AccountsInfo from './pages/AccountsInfo';  // Importamos el componente "AccountsInfo"
-import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <AuthProvider>
         <AccountsInfo />
-      </header>
+      </AuthProvider>,
     </div>
   );
 }

@@ -1,86 +1,125 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Item from '../components/item/item';  // Importamos el componente "Item"
-import TradeList from '../components/tradeList/index';  // Importamos el componente "TradeList"
-import TradeButtons from '../components/historyButton/index';  // Importamos el componente "TradeButtons"
-import ListOfTraderCard from '../components/listOfTraderCard/index';  // Importamos el componente "ListOfTraderCard"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import TradeList from "../components/tradeList/index";
+import TradeButtons from "../components/historyButton/index";
+import { loginWithGoogle } from "../firebase/auth";
+import { getAuth } from "firebase/auth";
 
-//hooks
-import useExcelGenerator from '../hooks/useExcelGenerator';
+import useExcelGenerator from "../hooks/useExcelGenerator";
 
-import './styles.css';
+import "./styles.css";
 
 const useTrades = () => {
   const [trades, setTrades] = useState([]);
-  const [loadingTrades, setLoadingTrades] = useState(true);
+  const [loadingTrades, setLoadingTrades] = useState(false);
+  const [token, setToken] = useState(null); // Estado para guardar el token JWT
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para determinar si el usuario está autenticado
 
+  // Función para iniciar sesión
+  const handleLogin = async () => {
+    try {
+      const userToken = await loginWithGoogle(); // Login con Google
+      setToken(userToken); // Guarda el token en el estado
+      setIsLoggedIn(true); // Marca al usuario como autenticado
+      console.log("User logged in, token:", userToken);
+    } catch (error) {
+      console.error("Error during login:", error.message);
+    }
+  };
+
+  // Función para obtener los trades
   const fetchTrades = async () => {
+    if (!token) {
+      console.error("No token available. Please log in first.");
+      return;
+    }
+
     setLoadingTrades(true);
     try {
-      const response = await axios.get('http://92.113.32.86:3000/api/orders');
+      const response = await axios.get("http://localhost:3000/api/orders", {
+        headers: {
+          Authorization: `Bearer ${token}`, // Usa el token almacenado
+        },
+      });
       setTrades(response.data);
-      console.log('Trades:', response.data);
+      console.log("Trades:", response.data);
     } catch (error) {
-      console.error('Error fetching trades:', error);
+      console.error("Error fetching trades:", error);
     } finally {
       setLoadingTrades(false);
     }
   };
 
-  useEffect(() => {
-    fetchTrades();
-    const intervalId = setInterval(fetchTrades, 60000);
-    return () => clearInterval(intervalId);
-  }, []);
-
-  return { trades, loadingTrades, fetchTrades };
-};
-
-const useAccountsBalance = () => {
-  const [accountsBalance, setAccountsBalance] = useState([]);
-  const [loadingBalance, setLoadingBalance] = useState(true);
-
-  const fetchAccountsBalance = async () => {
-    setLoadingBalance(true);
+  // Función para refrescar el token
+  const refreshToken = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/mock/accounts/balance');
-      setAccountsBalance(response.data);
-      console.log('Accounts Balance:', response.data);
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (user) {
+        const newToken = await user.getIdToken(true); // Refresca el token
+        setToken(newToken);
+        console.log("Token refreshed:", newToken);
+      }
     } catch (error) {
-      console.error('Error fetching accounts balance:', error);
-    } finally {
-      setLoadingBalance(false);
+      console.error("Error refreshing token:", error.message);
     }
   };
 
+  // Intervalo para actualizar trades si el usuario está autenticado
   useEffect(() => {
-    fetchAccountsBalance();
-  }, []);
+    if (isLoggedIn) {
+      fetchTrades(); // Cargar trades al iniciar sesión
+      const intervalId = setInterval(fetchTrades, 60000); // Actualiza cada 60 segundos
+      return () => clearInterval(intervalId); // Limpia el intervalo al desmontar
+    }
+  }, [isLoggedIn, token]);
 
-  return { accountsBalance, loadingBalance };
+  // Intervalo para refrescar el token cada 55 minutos (antes de que expire)
+  useEffect(() => {
+    if (isLoggedIn) {
+      const refreshInterval = setInterval(refreshToken, 55 * 60 * 1000); // Cada 55 minutos
+      return () => clearInterval(refreshInterval); // Limpia el intervalo al desmontar
+    }
+  }, [isLoggedIn]);
+
+  return { trades, loadingTrades, handleLogin, fetchTrades, isLoggedIn };
 };
 
 const AccountsInfo = () => {
-  const { trades, loadingTrades, fetchTrades } = useTrades();
-  const { accountsBalance, loadingBalance } = useAccountsBalance();
+  const { trades, loadingTrades, handleLogin, fetchTrades, isLoggedIn } = useTrades();
   const [notification, setNotification] = useState(null);
 
-  useEffect(() => {
-    if (!loadingTrades && !loadingBalance) {
-      setNotification('Datos actualizados con éxito');
-    }
-  }, [loadingTrades, loadingBalance]);
+  // Notifica al usuario cuando los datos son actualizados
+  const handleFetchTrades = async () => {
+    await fetchTrades();
+    setNotification("Datos actualizados con éxito");
+  };
 
   return (
-    <div>
-        <h1 className='trades-title'>Futures Trades</h1>
-        {notification && <div className="popup-notification">{notification}</div>}
-        <TradeButtons onGenerateExcel={useExcelGenerator} onReload={fetchTrades}/>
-        <TradeList trades={trades} />
-        <div>
-            <h1 style={{ textAlign: 'center', color: 'white', padding: '20px' }}>Lista de Traders</h1>
-            <ListOfTraderCard traders={accountsBalance} />
+    <div className="app-container">
+      <h1 className="trades-title">Futures Trades</h1>
+      {notification && <div className="popup-notification">{notification}</div>}
+
+      {!isLoggedIn && (
+        <div className="login-container">
+          <button className="google-login-button" onClick={handleLogin}>
+            <img
+              src="https://developers.google.com/identity/images/g-logo.png"
+              alt="Google logo"
+              className="google-logo"
+            />
+            Login with Google
+          </button>
         </div>
+      )}
+
+      {isLoggedIn && (
+        <>
+          <TradeButtons onGenerateExcel={useExcelGenerator} onReload={handleFetchTrades} />
+          {loadingTrades ? <p>Cargando trades...</p> : <TradeList trades={trades} />}
+        </>
+      )}
     </div>
   );
 };

@@ -14,7 +14,7 @@
 .trade-button {
     background-color: #f0b90b;
     color: #1e1e1e;
-    border: 1px solid transparent; /* Borde invisible inicialmente */
+    border: 1px solid; /* Borde invisible inicialmente */
     padding: 10px 20px; /* Asegúrate de mantener el mismo padding */
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
@@ -35,10 +35,12 @@
 }
 
 .reload-button {
-    background-color: #333333;
+    background-color: #1e1e1e;
     color: #f0b90b;
 }
 
 .reload-button:hover {
-    background-color: #292929;
+    background-color: #f0b90b;
+    color: #1e1e1e;
+
 }
