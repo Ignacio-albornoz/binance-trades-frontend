@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TradeList from "../components/tradeList/index";
 import TradeButtons from "../components/historyButton/index";
+import { useAuth } from "../context/AuthContext"; // Asegúrate de importar el contexto correcto
+
 import { loginWithGoogle } from "../firebase/auth";
 import { getAuth } from "firebase/auth";
 
@@ -11,6 +13,7 @@ import "./styles.css";
 
 const useTrades = () => {
   const [trades, setTrades] = useState([]);
+  const { saveToken } = useAuth();
   const [loadingTrades, setLoadingTrades] = useState(false);
   const [token, setToken] = useState(null); // Estado para guardar el token JWT
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para determinar si el usuario está autenticado
@@ -21,6 +24,7 @@ const useTrades = () => {
       const userToken = await loginWithGoogle(); // Login con Google
       setToken(userToken); // Guarda el token en el estado
       setIsLoggedIn(true); // Marca al usuario como autenticado
+      saveToken(userToken);
       console.log("User logged in, token");
     } catch (error) {
       console.error("Error during login:", error.message);

@@ -13,8 +13,6 @@ const TradeButtons = ({ onReload }) => {
     const [statusMessage, setStatusMessage] = useState('');
     const { token } = useAuth();
 
-    console.log('Token:', token);
-
     const updateWallet = async () => {
         try {
             const response = await axios.get("http://92.113.32.86:3000/api/update-record", {

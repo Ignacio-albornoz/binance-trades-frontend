@@ -11,10 +11,15 @@ export const AuthProvider = ({ children }) => {
       const userToken = await loginFunction();
       setToken(userToken);
       setIsLoggedIn(true);
-      console.log("User logged in");
+      console.log("User logged in, token:", userToken);
     } catch (error) {
       console.error("Error during login:", error.message);
     }
+  };
+
+  const saveToken = (userToken) => {
+    setToken(userToken);
+    setIsLoggedIn(true);
   };
 
   const handleLogout = () => {
@@ -24,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, token, handleLogin, handleLogout }}>
+    <AuthContext.Provider value={{ isLoggedIn, token, handleLogin, handleLogout, saveToken }}>
       {children}
     </AuthContext.Provider>
   );
