@@ -1,3 +1,7 @@
+import React from 'react';
+import Item from '../item/item'; // Asegúrate de que Item esté en la ruta correcta
+import './styles.css';
+
 const TradeList = ({ trades }) => {
     const hasTrades = trades.length > 0 && trades.some((group) => group.length > 0);
 
@@ -18,14 +22,15 @@ const TradeList = ({ trades }) => {
                     <tbody>
                         {trades.map((tradeGroup, groupIndex) => (
                             tradeGroup.map((trade, index) => (
-                                <tr key={`${groupIndex}-${index}`}>
-                                    <td data-label="Name">{trade.name}</td>
-                                    <td data-label="Symbol">{trade.symbol}</td>
-                                    <td data-label="Unrealized Profit">{trade.unrealizedProfit}</td>
-                                    <td data-label="Entry Price">{trade.entryPrice}</td>
-                                    <td data-label="Mark Price">{trade.markPrice}</td>
-                                    <td data-label="Leverage">{trade.leverage}</td>
-                                </tr>
+                                <Item
+                                    key={`${groupIndex}-${index}`}
+                                    name={trade.name}
+                                    symbol={trade.symbol}
+                                    unrealizedProfit={trade.unrealizedProfit}
+                                    entryPrice={trade.entryPrice}
+                                    markPrice={trade.markPrice}
+                                    leverage={trade.leverage}
+                                />
                             ))
                         ))}
                     </tbody>
