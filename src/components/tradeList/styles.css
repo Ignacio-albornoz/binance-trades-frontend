@@ -11,11 +11,15 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.table-wrapper{
+    margin-top: 16px;
+}
+
 /* Barra de carga animada */
 .loading-bar {
     height: 4px;
     width: 100%;
-    background: linear-gradient(90deg, #f0b90b 0%, #ffe08c 50%, #f0b90b 100%);
+    background: linear-gradient(90deg, #1e1e1e 0%, #f0b90b 50%, #1e1e1e 100%);
     background-size: 200%;
     animation: loading 1.5s infinite;
     margin-bottom: 0px;
@@ -36,7 +40,6 @@
 .table-container {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 16px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
