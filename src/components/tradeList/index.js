@@ -15,7 +15,7 @@ const TradeList = ({ trades }) => {
                             <th>Symbol</th>
                             <th>Unrealized Profit</th>
                             <th>Entry Price</th>
-                            <th>Mark Price</th>
+                            <th className='mark-price-header'>Mark Price</th>
                             <th>Leverage</th>
                         </tr>
                     </thead>
