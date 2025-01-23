@@ -8,7 +8,7 @@ const TradeList = ({ trades }) => {
     return (
         <div>
             {hasTrades ? (
-                <table>
+                <table className='table-container'>
                     <thead>
                         <tr>
                             <th>Name</th>
